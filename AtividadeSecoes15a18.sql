@@ -110,7 +110,7 @@ REVOKE UPDATE ON cliente FROM atendente_agencia;
 -- 10
 CREATE USER auditor IDENTIFIED BY senha_auditor;
 GRANT CREATE SESSION TO auditor;
-GRANT SELECT ANY VIEW TO auditor;
+GRANT SELECT ANY table TO auditor;
 
 -- Seção 18 – Expressões Regulares
 
