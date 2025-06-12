@@ -1,6 +1,6 @@
 --Lista de Exercícios – Seções 15 a 18
 --Tema: Sequências, Views, Privilégios, e Expressões Regulares
-Contexto: Sistema de Agência Bancária
+--Contexto: Sistema de Agência Bancária
 
 --🔹 Seção 15 – Uso de Sequências
 --Crie uma sequência chamada seq_movimento iniciando em 100 e com incremento de 10.
