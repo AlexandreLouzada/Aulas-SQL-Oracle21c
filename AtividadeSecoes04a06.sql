@@ -8,9 +8,6 @@ ALTER TABLE conta ADD (data_abertura DATE);
 UPDATE conta
 SET data_abertura = TRUNC(SYSDATE - DBMS_RANDOM.VALUE(0, 365*3));
 
-COMMIT;
-
-
 --------------------------------------------------------------------------------
 -- Questão 1: Nome dos clientes em letras maiúsculas
 --------------------------------------------------------------------------------
