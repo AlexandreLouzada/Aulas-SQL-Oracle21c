@@ -1,55 +1,79 @@
--- Questão 1: Exibir todos os dados da tabela de clientes
-SELECT * FROM cliente;
-
--- Questão 2: Exibir nome e cidade dos clientes
-SELECT cliente_nome, cidade FROM cliente;
-
--- Questão 3: Exibir número da conta e saldo de todas as contas
-SELECT conta_numero, saldo FROM conta;
-
--- Questão 4: Clientes da cidade de Macaé
-SELECT cliente_nome FROM cliente
-WHERE cidade = 'Macaé';
-
--- Questão 5: Clientes com código entre 5 e 15
-SELECT cliente_cod, cliente_nome
+-- Q1) Exibir todos os dados da tabela de clientes
+SELECT *
 FROM cliente
-WHERE cliente_cod BETWEEN 5 AND 15;
+ORDER BY cliente_cod;
 
--- Questão 6: Clientes de Niterói, Volta Redonda ou Itaboraí
-SELECT cliente_nome, cidade
-FROM cliente
-WHERE cidade IN ('Niterói', 'Volta Redonda', 'Itaboraí');
+-- Q2) Exibir nome e cidade dos clientes
+SELECT c.cliente_nome, c.cidade
+FROM cliente c
+ORDER BY c.cliente_nome;
 
--- Questão 7: Clientes cujo nome começa com "F"
-SELECT cliente_nome
-FROM cliente
-WHERE cliente_nome LIKE 'F%';
+-- Q3) Exibir número da conta e saldo de todas as contas
+SELECT ct.conta_numero, ct.saldo
+FROM conta ct
+ORDER BY ct.conta_numero;
 
--- Questão 8: Frase com nome e cidade do cliente
-SELECT cliente_nome || ' mora em ' || cidade AS Frase
-FROM cliente;
+-- Q4) Clientes da cidade de Macaé
+SELECT c.cliente_nome
+FROM cliente c
+WHERE c.cidade = 'Macaé'
+ORDER BY c.cliente_nome;
 
--- Questão 9: Contas com saldo superior a R$ 9.000, ordenadas decrescentemente
-SELECT conta_numero, saldo
-FROM conta
-WHERE saldo > 9000
-ORDER BY saldo DESC;
+-- Q5) Clientes com código entre 5 e 15 (inclusive)
+SELECT c.cliente_cod, c.cliente_nome
+FROM cliente c
+WHERE c.cliente_cod BETWEEN 5 AND 15
+ORDER BY c.cliente_cod;
 
--- Questão 10: Clientes com "Silva" no nome ou da cidade Nova Iguaçu
-SELECT cliente_nome, cidade
-FROM cliente
-WHERE cliente_nome LIKE '%Silva%' OR cidade = 'Nova Iguaçu';
+-- Q6) Clientes de Niterói, Volta Redonda ou Itaboraí
+SELECT c.cliente_nome, c.cidade
+FROM cliente c
+WHERE c.cidade IN ('Niterói', 'Volta Redonda', 'Itaboraí')
+ORDER BY c.cidade, c.cliente_nome;
 
--- Questão 11: Saldo das contas com arredondamento para o inteiro mais próximo
-SELECT conta_numero, ROUND(saldo, 0) AS saldo_arredondado
-FROM conta;
+-- Q7) Clientes cujo nome começa com "F"
+SELECT c.cliente_nome
+FROM cliente c
+WHERE c.cliente_nome LIKE 'F%'
+ORDER BY c.cliente_nome;
 
--- Questão 12: Nome dos clientes em letras maiúsculas
-SELECT UPPER(cliente_nome) AS nome_maiusculo
-FROM cliente;
+-- Q8) Frase com nome e cidade do cliente
+SELECT c.cliente_nome || ' mora em ' || c.cidade AS frase
+FROM cliente c
+ORDER BY c.cliente_nome;
 
--- Questão 13: Clientes que não são de Teresópolis nem de Campos dos Goytacazes
-SELECT cliente_nome, cidade
-FROM cliente
-WHERE cidade NOT IN ('Teresópolis', 'Campos dos Goytacazes');
+-- Q9) Contas com saldo > R$ 9.000, em ordem decrescente de saldo
+SELECT ct.conta_numero, ct.saldo
+FROM conta ct
+WHERE ct.saldo > 9000
+ORDER BY ct.saldo DESC, ct.conta_numero;
+
+-- (Opcional de exibição monetária)
+-- SELECT ct.conta_numero,
+--        'R$ ' || TO_CHAR(ct.saldo, 'FM999G999G990D00', 'NLS_NUMERIC_CHARACTERS=,.') AS saldo_fmt
+-- FROM conta ct
+-- WHERE ct.saldo > 9000
+-- ORDER BY ct.saldo DESC, ct.conta_numero;
+
+-- Q10) Clientes com "Silva" no nome ou da cidade "Nova Iguaçu"
+SELECT c.cliente_nome, c.cidade
+FROM cliente c
+WHERE c.cliente_nome LIKE '%Silva%'
+   OR c.cidade = 'Nova Iguaçu'
+ORDER BY c.cliente_nome;
+
+-- Q11) Saldo das contas arredondado para o inteiro mais próximo
+SELECT ct.conta_numero, ROUND(ct.saldo, 0) AS saldo_arredondado
+FROM conta ct
+ORDER BY ct.conta_numero;
+
+-- Q12) Nome dos clientes em letras maiúsculas
+SELECT UPPER(c.cliente_nome) AS nome_maiusculo
+FROM cliente c
+ORDER BY nome_maiusculo;
+
+-- Q13) Clientes que não são de Teresópolis nem de Campos dos Goytacazes
+SELECT c.cliente_nome, c.cidade
+FROM cliente c
+WHERE c.cidade NOT IN ('Teresópolis', 'Campos dos Goytacazes')
+ORDER BY c.cidade, c.cliente_nome;
