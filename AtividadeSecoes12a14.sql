@@ -91,7 +91,6 @@ VALUES (1002, 2, 2000, 'BLOQUEADO');
 INSERT INTO cartao_credito (cartao_numero, cliente_cod, limite_credito, status)
 VALUES (1003, 3, 3500, 'CANCELADO');
 
-COMMIT;
 
 -- 12) Criar a tabela transacao (com constraints nomeadas)
 -- (Se precisar recriar, descomente o bloco de DROP)
